@@ -1,0 +1,33 @@
+html{
+  font-family: sans-serif;
+  font-size: medium;
+  font-kerning: normal;
+  line-height: 1.3rem;
+}
+
+nav{
+  font-size: small;
+  word-spacing: 1.0rem;
+}
+
+
+body{
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 10rem;
+}
+
+
+p, h1, h2, h3, h4, h5, h6{
+  font-weight: normal;
+  max-width: 45rem;
+}
+
+balockquote {
+  font-weight: lighter;
+  font-style: italic;
+  font-family: serif;
+  font-size: small;
+  margin-left: 20%;
+  margin-right: 20%;
+}
