@@ -15,37 +15,105 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- CSS -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" href="css/mystyles.css">
+  <link rel="stylesheet" href="css/normalize.css"> <!-- Resets any existing styling -->
+  <link rel="stylesheet" href="css/skeleton.css">  <!-- Applies Skeleton styles -->
+  <link rel="stylesheet" href="css/mystyles.css">  <!-- Personal styles -->
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/png" href="./favicon.png">
 
 </head>
 
 
 
 <header class="container">
-  <div class="row" style="margin-top: 10%">
-    <div class="four columns">
-      <img class="profile-pic u-max-full-width" src="./me.jpeg" alt="Profile picture of Paul Briërley" />
+  <div class="row banner-spaced">
+    <div class="one-third column">
+      <img class="profile-pic u-full-width" src="./me.jpeg" alt="Profile picture of Paul Briërley" />
     </div>
-    <div class="eight columns" style="margin-top: 10%">
-      <h1>Paul Briërley</h1>
+    <div class="two-thirds column" style="margin-top: 10%">
+      <h1 class="u-pull-right">Paul Briërley</h1>
     </div>
   </div>
-  <div class="row">
-    <a class="button button-primary" href="https://twitter.com/paulopadopalos">Twitter</a>
-    <a class="button button-primary" href="https://instagram.com/paulopadopalos">Instagram</a>
-
-  </div>
-
 </header>
 
 
 
 <body class="container">
+
+  <div class="row">
+    <div class="one-third column">
+      <h4>Connect</h4>
+    </div>
+    <div class="two-thirds column">
+      <a href="http://twitter.com/paulopadopalos" class="button">Twitter</a>
+      <a href="http://instagram.com/paulopadopalos" class="button">Instagram</a>
+      <a href="https://www.linkedin.com/in/pbrierley/" class="button">LinkedIn</a>
+      <a href="https://github.com/paulopadopalos" class="button">GitHub</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="one-third column">
+      <h4>About Me</h4>
+    </div>
+    <div class="two-thirds column">
+      <p>So somehow you've stumbled upon this web page and it belongs to me. Hello, and welcome! I'm based in the north west of England (in fact my family has roots here going back at least 400 years). I spend my days working in higher education administration, dealing with student data systems and in particular have a lot of experience in scheduling and timetabling.</p>
+      <p>I'm also a born geek, and spend my time outside of work on various personal projects which you can find more information about below. My partner Mark and I are also huge fans of food and cooking, and you can see what we've been making recently on our Instagram account, <a href="https://www.instagram.com/twohungryboys/">Two Hungry Boys</a>.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="four columns">
+      <h4>Projects</h4>
+    </div>
+    <div class="eight columns">
+      <div class="row">
+        <div class="one-third column">
+          <h5>Combo Calculator</h5>
+        </div>
+        <div class="two-thirds column">
+          <p><a href="./projects/combo-counter.html">Combo Calculator</a> is an iOS app written using SwiftUI to help universities with curriculum design. It calculates the number of possible pathways through a programme based on the course unit or module choices available to them, thereby helping identify the timetabling implications of student choice.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="one-third column">
+          <h5>Exam Attendance</h5>
+        </div>
+        <div class="two-thirds column">
+          <p><a href="./projects/exam-attendance.html">Exam Attendance</a> is an iOS app written using SwiftUI for invigilators to take attendance during examinations. Attendance can be recorded by scanning barcodes or text on student ID cards, or by manually entering the student details.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="one-third column">
+          <h5>Staff Data Collector</h5>
+        </div>
+        <div class="two-thirds column">
+          <p><a href="./projects/staff-data-collector.html">Staff Data Collector</a> is an iOS app written using Swift UI to collect information about staff working preferences and availability. The data can be exported in <abbr title="Universal Exchange Format">UEF</abbr> format for use with <a href="https://www.scientia.com/">Scientia</a>'s timetabling systems.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="one-third column">
+          <h5>Timetable Chat Bot</h5>
+        </div>
+        <div class="two-thirds column">
+          <p>This was the world's first chat bot for helping students with their timetables. Written in Node.js and using <abbr title="Natural Language Processing">NLP</abbr> and <abbr title="Machine Learning">ML</abbr>, students could ask free form questions (e.g. "When is the next seminar for MATH101?") and receive an immediate response. The bot could be reached through multiple messaging apps including Facebook Messenger, Telegram, Viber, kik, LINE and Twitter.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="row">
+    <div class="one-third column">
+      <h5>Colophon</h5>
+    </div>
+    <div class="two-thirds column">
+      <p>This site is hand written HTML, composed using <a href="https://atom.io/">Atom</a>. CSS styling comes mostly from <a href="http://getskeleton.com/">Skeleton</a> with a few custom additions. The actual pages are hosted using <a href="https://pages.github.com/">GitHub Pages</a>.</p>
+    </div>
+  </div>
 
 </body>
 

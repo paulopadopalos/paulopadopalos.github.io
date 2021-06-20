@@ -4,3 +4,8 @@
   border-width: thick;
   border-radius: 50%;
 }
+
+.banner-spaced {
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
