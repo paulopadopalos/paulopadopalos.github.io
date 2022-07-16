@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Paul Briërley</title>
-    <link>https://paulbrierley.xyz/</link>
+    <link>https://www.paulbrierley.xyz/</link>
     <description>Recent content on Paul Briërley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sat, 16 Jul 2022 12:00:00 +0100</lastBuildDate><atom:link href="https://paulbrierley.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 16 Jul 2022 12:00:00 +0100</lastBuildDate><atom:link href="https://www.paulbrierley.xyz/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Exam Attendance</title>
-      <link>https://paulbrierley.xyz/apps/exam-attendance/</link>
+      <link>https://www.paulbrierley.xyz/apps/exam-attendance/</link>
       <pubDate>Sat, 16 Jul 2022 12:00:00 +0100</pubDate>
       
-      <guid>https://paulbrierley.xyz/apps/exam-attendance/</guid>
+      <guid>https://www.paulbrierley.xyz/apps/exam-attendance/</guid>
       <description>Exam Attendance Exam Attendance is an iOS app which allows exam invigilators to take attendance at an examination in a number of ways. You can use the app to scan student ID cards for a barcode or piece of identifying text, and the identifier found will be logged. If scanning fails, or no suitable ID is available, you can manually enter a record for the attendee. The time of each entry is recorded, and you can optionally record the venue of the examination.</description>
     </item>
     
     <item>
       <title>Staff Data Collector</title>
-      <link>https://paulbrierley.xyz/apps/staff-data-collector/</link>
+      <link>https://www.paulbrierley.xyz/apps/staff-data-collector/</link>
       <pubDate>Sat, 16 Jul 2022 12:00:00 +0100</pubDate>
       
-      <guid>https://paulbrierley.xyz/apps/staff-data-collector/</guid>
+      <guid>https://www.paulbrierley.xyz/apps/staff-data-collector/</guid>
       <description>Staff Data Collector Staff Data Collector is an iOS app for use in conjunction with the Scientia suite of timetabling software. It allows user to capture information about staff without the need for a computer running Syllabus+ or access to the internet. Once collected, data can be exported as a UEF file which a coordinator can load directly into Syllabus+.
 Download on the App Store
 Data and Privacy Your data is yours and yours alone.</description>
@@ -29,10 +29,10 @@ Data and Privacy Your data is yours and yours alone.</description>
     
     <item>
       <title>Combo Counter</title>
-      <link>https://paulbrierley.xyz/apps/combo-counter/</link>
+      <link>https://www.paulbrierley.xyz/apps/combo-counter/</link>
       <pubDate>Fri, 15 Jul 2022 11:24:10 +0100</pubDate>
       
-      <guid>https://paulbrierley.xyz/apps/combo-counter/</guid>
+      <guid>https://www.paulbrierley.xyz/apps/combo-counter/</guid>
       <description>Combo Counter Combo Counter is an iOS app to support staff when planning their curriculum.
 Many degree programmes are structured as a series of choices, where students will choose either a certain number of modules (or course units), or select a number of modules to meet a pre-determined number of credits.
 These rules often hide a surprising level of complexity, and even simple programmes can have hundreds if not thousands of possible pathways which can make timetable planning incredibly hard.</description>
@@ -40,10 +40,10 @@ These rules often hide a surprising level of complexity, and even simple program
     
     <item>
       <title>Timetable Chat Bot</title>
-      <link>https://paulbrierley.xyz/apps/timetable-chat-bot/</link>
+      <link>https://www.paulbrierley.xyz/apps/timetable-chat-bot/</link>
       <pubDate>Fri, 15 Jul 2022 11:24:10 +0100</pubDate>
       
-      <guid>https://paulbrierley.xyz/apps/timetable-chat-bot/</guid>
+      <guid>https://www.paulbrierley.xyz/apps/timetable-chat-bot/</guid>
       <description>Timetable Chat Bot This was the world&amp;rsquo;s first chat bot for helping students with their timetables.
 Written in Node.js and using NLP and ML, students could ask free form questions and receive an immediate response, for example:
   Student: &amp;ldquo;When is the next lecture for MATH101?&amp;rdquo;
