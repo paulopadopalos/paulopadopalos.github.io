@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://paulbrierley.xyz/apps/</loc>
+    <lastmod>2022-07-16T12:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://paulbrierley.xyz/apps/exam-attendance/</loc>
+    <lastmod>2022-07-16T12:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://paulbrierley.xyz/</loc>
+    <lastmod>2022-07-16T12:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://paulbrierley.xyz/apps/staff-data-collector/</loc>
+    <lastmod>2022-07-16T12:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://paulbrierley.xyz/apps/combo-counter/</loc>
+    <lastmod>2022-07-15T11:24:10+01:00</lastmod>
+  </url><url>
+    <loc>https://paulbrierley.xyz/apps/timetable-chat-bot/</loc>
+    <lastmod>2022-07-15T11:24:10+01:00</lastmod>
+  </url><url>
+    <loc>https://paulbrierley.xyz/categories/</loc>
+  </url><url>
+    <loc>https://paulbrierley.xyz/tags/</loc>
+  </url>
+</urlset>
