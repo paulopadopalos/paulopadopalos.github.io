@@ -1,0 +1,62 @@
+/*
+  We wrap all our content in the following <div> which ensures a two column
+  layout for the whole page.
+*/
+.wrapper
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1px;
+}
+
+
+
+/*
+  The site is split up into <header>, <main> and <footer> sections so we define
+  that these all take up the full width of the grid.
+*/
+header
+{
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+main
+{
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+footer
+{
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+
+
+/*
+  However the <footer> is also a grid container.
+*/
+footer
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+
+
+/*
+  The <footer> is then split into two <divs>, one for each column.
+*/
+.footer_social
+{
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.footer_colophon
+{
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
