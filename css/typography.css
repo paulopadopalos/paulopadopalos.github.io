@@ -95,6 +95,7 @@ blockquote
 time
 {
   font-style: italic;
+  font-size: var(--size-400);
 }
 
 
@@ -147,10 +148,6 @@ a:not([class])
     max-width: 40ch;
   }
 
-  time
-  {
-    font-size: var(--size-600);
-  }
 
   .footer_colophon p
   {

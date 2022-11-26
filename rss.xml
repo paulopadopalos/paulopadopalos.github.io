@@ -10,11 +10,11 @@
 		<description>Articles on technology, scheduling and higher education.</description>
 
 		<item>
-			<title>Monte Carlo on a Blackpool Budget</title>
-			<link>https://www.paulbrierley.xyz/articles/monte-carlo-on-a-blackpool-budget.html</link>
-			<guid>https://www.paulbrierley.xyz/articles/monte-carlo-on-a-blackpool-budget.html</guid>
-			<pubDate>Sat, 26 Nov 2022 12:00:00 GMT</pubDate>
-			<description>Physicists use Monto Carlo modelling for complex scenarios, but timetablers can implement a simpler version using Excel.</description>
+			<title>Timetable Contact Tracing</title>
+			<link>https://www.paulbrierley.xyz/articles/timetable-contact-tracing.html</link>
+			<guid>https://www.paulbrierley.xyz/articles/timetable-contact-tracing.html</guid>
+			<pubDate>Wed, 12 Jan 2022 12:00:00 GMT</pubDate>
+			<description>During the pandemic it was critical to identify students who had been in contact with those who had tested positive for COVID-19. This  article provides some resources for performing contact tracing on timetable data from Syllabus+.</description>
 		</item>
 
 	</channel>
