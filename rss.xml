@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	
+	<channel>
+
+		<atom:link href="https://www.paulbrierley.xyz/rss.xml" rel="self" type="application/rss+xml" />
+
+		<title>Paul Briërley</title>
+		<link>https://www.paulbrierley.xyz/</link>
+		<description>Articles on technology, scheduling and higher education.</description>
+
+		<item>
+			<title>Monte Carlo on a Blackpool Budget</title>
+			<link>https://www.paulbrierley.xyz/articles/monte-carlo-on-a-blackpool-budget.html</link>
+			<guid>https://www.paulbrierley.xyz/articles/monte-carlo-on-a-blackpool-budget.html</guid>
+			<pubDate>Sat, 26 Nov 2022 12:00:00 GMT</pubDate>
+			<description>Physicists use Monto Carlo modelling for complex scenarios, but timetablers can implement a simpler version using Excel.</description>
+		</item>
+
+	</channel>
+
+</rss>

@@ -42,6 +42,11 @@ menu li
   display: inline-block;
 }
 
+.footer_colophon p
+{
+  float: right;
+}
+
 
 
 ::selection

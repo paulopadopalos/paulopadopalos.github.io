@@ -50,7 +50,7 @@ h1
   line-height: 1.3;
   font-weight: 900;
   max-width: 15ch;
-  margin-bottom: 1;
+  margin-bottom: 1.0rem;
 }
 
 h2
@@ -78,7 +78,7 @@ h4
   font-family: helvetica, sans-serif;
   line-height: 1.3;
   margin-top: 0.75rem;
-  marghin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 figcaption
