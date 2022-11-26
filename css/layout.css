@@ -37,10 +37,20 @@ menu li
 
 
 
+
+.footer_social ul
+{
+  padding-left:0;
+}
+
+
+
 .footer_social li
 {
   display: inline-block;
 }
+
+
 
 .footer_colophon p
 {
