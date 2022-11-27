@@ -16,6 +16,43 @@ img
   max-width: min(55rem, 100%);
 }
 
+
+
+figcaption
+{
+  padding-bottom: 1rem;
+  color: coral;
+}
+
+
+
+code
+{
+  color: coral;
+}
+
+
+
+th
+{
+  background-color: #FFD662;
+  color: #00539C;
+  padding: 0.2rem;
+  font-family: Helvetica, sans-serif;
+}
+
+
+
+td
+{
+  border-style: solid;
+  border-width: 1px;
+  padding: 0.2rem;
+  font-family: Helvetica, sans-serif;
+}
+
+
+
 .profile_pic
 {
   width: 10rem;

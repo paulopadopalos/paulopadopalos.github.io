@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="author" content="Paul Briërley">
+    <meta name="keywords" content="Paul Brierley, Paul Briërley, Scheduling, Timetabling, Higher Education">
+    <meta name="description" content="Paul Briërley's personal website.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="canonical" href="https://www.paulbrierley.xyz/">
+    <link rel="icon" href="/images/favicon/favicon-32.png" sizes="32x32">
+    <link rel="icon" href="/images/favicon/favicon-128.png" sizes="128x128">
+    <link rel="icon" href="/images/favicon/favicon-180.png" sizes="180x180">
+    <link rel="icon" href="/images/favicon/favicon-192.png" sizes="192x192">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/grid.css">
+    <link rel="stylesheet" href="/css/typography.css">
+
+    <title>Paul Briërley</title>
+
+  </head>
+
+
+
+  <body>
+
+    <div class="wrapper">
+
+
+
+      <header>
+        <a id="topOfPage"></a>
+        <h1>Paul Briërley</h1>
+        <nav>
+          <menu>
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/">Tools</a></li>
+            <li><a href="/articles/">Articles</a></li>
+            <li><a href="/resources/">Resources</a></li>
+            <li><a href="/about/">About</a></li>
+          </menu>
+        </nav>
+      </header>
+
+
+
+      <main>
+
+        <article>
+
+          <h2>Calculating Student Pathways in Excel</h2>
+          <p><time datetime="20221127T1200">27<sup>th</sup> November 2022</time></p>
+          
+          <p>A common starting point for planning the forthcoming year's timetable is to look at what combinations of courses students enrolled for in the previous year.</p>
+
+          <p>Unfortunately, most timetabling or student record systems don't make it easy to obtain this information. It's easy enough to pull out lists of which students were enrolled on which course units, but they typically come out with one choice per row, like this:</p>
+
+          <figure>
+            <table>
+                <tr><th>Student ID</th><th>Student Choice</th></tr>
+                <tr><td>010123</td><td>MATH102</td></tr>
+                <tr><td>010123</td><td>PHYS104</td></tr>
+                <tr><td>010123</td><td>MATH101</td></tr>
+            </table>
+            <figcaption>Table 1 - Student choice data.</figcaption>
+          </figure>
+
+          <p>As timetablers, we want to work out the unique combinations of student choices and the number of students for each combination. That transforms the data to look like this:</p>
+
+          <figure>
+            <table>
+                <tr><th>Pathway</th><th>Students</th></tr>
+                <tr><td>MATH101, MATH102, PHYS104</td><td>1</td></tr>
+            </table>
+            <figcaption>Table 2 – Desired output.</figcaption>
+          </figure>
+
+          <p>This sort of transformation isn't straightforward. I used to do it by copying the student IDs to a new worksheet and using the "remove duplicates" feature in Excel, leaving me with one row per student. I would then write a VBA macro to find the choices for each student, sort them into alphabetical order and then concatenate them. Once this had run, I would then create a pivot table to count how many students had the same combinations of choices. This approach worked, but it was slow and fiddly – it was also difficult to troubleshoot for non-technical users.</p>
+
+          <p>However, it turns out that Excel for Microsoft 365 has some new features which <em>massively</em> simplify this process. If you have this version of Excel you can now perform the whole transformation using native Excel functions, no VBA or pivot tables required.</p>
+
+          <h3>Step 0 – Sort your data before you start!</h3>
+          <p>The first and most crucial step is to sort your student enrolment data alphabetically by course unit / module code. This will ensure that our process knows "MATH101, MATH102" is the same as "MATH102, MATH101". This will change the data shown in Table 1 to look like this:</p>
+
+          <figure>
+            <table>
+              <tr><th>A</th><th>B</th></tr>
+              <tr><td>010123</td><td>MATH101</td></tr>
+              <tr><td>010123</td><td>MATH102</td></tr>
+              <tr><td>010123</td><td>PHYS104</td></tr>
+            </table>
+            <figcaption>Table 3 – Our original data, sorted by course unit code (column B).</figcaption>
+          </figure>
+        
+          <h3>Step 1 – Get a list of unique student IDs</h3>
+          <p>The first function we need to use is <code>UNIQUE</code>. This function takes an array of data and returns only the unique rows. Therefore if our student IDs are listed in column A then <code>=UNIQUE(A:A)</code> will give us a list of student IDs with each student appearing only once. We can store this in colum C as shown below.</p>
+
+          <figure>
+            <table>
+              <tr><th>A</th><th>B</th><th>C</th></tr>
+              <tr><td>010123</td><td>MATH101</td><td>010123</td></tr>
+              <tr><td>010123</td><td>MATH102</td><td></td></tr>
+              <tr><td>010123</td><td>PHYS104</td><td></td></tr>
+            </table>
+            <figcaption>Table 4 – We've added column C, the list of unique student IDs.</figcaption>
+          </figure>
+
+          <h3>Step 2 – Get the choices for a student</h3>
+          <p>You can now use the <code>FILTER</code> function to return a list of the course units for a particular student. If we have our original choice data in columns A (student IDs) and B (course unit codes) then <code>=FILTER(B:B, A:A=C1, "")</code> will return the course unit choices for the student ID listed in cell C1.</p>
+          <p>If you try this out, you'll quickly spot a problem - the course units are listed vertically, which means the choices for a second student would start overwriting the choices of the first...</p>
+          
+          <figure>
+            <table>
+              <tr><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+              <tr><td>010123</td><td>MATH101</td><td>010123</td><td>MATH101</td></tr>
+              <tr><td>010123</td><td>MATH102</td><td></td><td>MATH102</td></tr>
+              <tr><td>010123</td><td>PHYS104</td><td></td><td>MATH103</td></tr>
+            </table>
+            <figcaption>Table 5 – FILTER gives us the student's choices in column D, but listed vertically.</figcaption>
+          </figure>
+
+          <h3>Step 3 – Concatenate the choices</h3>
+          <p>Our third and final function is <code>TEXTJOIN</code>. This will take the list of values in the previous step and concatenate them into a single string. We need to wrap <code>TEXTJOIN</code> around our previous <code>FILTER</code> function so it looks like <code>=TEXTJOIN(",", TRUE, FILTER(B:B, A:A=C1, ""))</code>. This will connect the codes using a comma, and the "true" indicates that we should ignore any blank entries. Now our spreadsheet looks like this:</p>
+
+          <figure>
+            <table>
+              <tr><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+              <tr><td>010123</td><td>MATH101</td><td>010123</td><td>MATH101, MATH102, MATH103</td></tr>
+              <tr><td>010123</td><td>MATH102</td><td></td><td></td></tr>
+              <tr><td>010123</td><td>PHYS104</td><td></td><td></td></tr>
+            </table>
+            <figcaption>Table 6 – Adding TEXTJOIN gives us the data we want in columns C and D.</figcaption>
+          </figure>
+
+          <h3>Step 4 – Things to be aware of</h3>
+          <p>In theory these three functions – <code>UNIQUE</code>, <code>FILTER</code> and <code>TEXTJOIN</code> give us exactly what we want. In practice, if you have a large number of students then Excel will struggle to process these. Be prepared for it to take a while to produce your final results.</p>
+          <p>But also, because this processing takes a while Excel cheats a little. It only performs the function for the data you're looking at. If you save the spreadsheet you'll find that the later rows just contain duplicates of the top rows. You actually need to <em>scroll down to the bottom of the spreadsheet</em> to make sure that Excel <em>actually</em> calculates all the combinations.</p>
+          <p>It's a little fiddly, but much simpler than the options we've had available to user before now.</p>
+
+        </article>
+
+      </main>
+
+
+
+      <footer>
+        <div class="footer_social">
+          <ul>
+            <li><a href="/rss.xml"><img src="/images/social/rss.svg" alt="RSS Feed Logo"></a></li>
+            <li><a href="https://www.linkedin.com/in/pbrierley/"><img src="/images/social/linkedin.svg" alt="LinkedIn Logo"></a></li>
+            <li><a href="https://github.com/paulopadopalos"><img src="/images/social/github.svg" alt="GitHub Logo"></a></li>
+          </ul>
+        </div>
+        <div class="footer_colophon">
+          <p><a href="#topOfPage"><img src="/images/top-of-page.svg" alt="Go to top of page"></a></p>
+        </div>
+      </footer>
+
+
+
+    </div><!-- end of wrapper -->
+
+  </body>
+
+</html>

@@ -10,6 +10,14 @@
 		<description>Articles on technology, scheduling and higher education.</description>
 
 		<item>
+			<title>Calculating Student Pathways in Excel</title>
+			<link>https://www.paulbrierley.xyz/articles/calculating-pathways-in-excel.html</link>
+			<guid>https://www.paulbrierley.xyz/articles/calculating-pathways-in-excel.html</guid>
+			<pubDate>Sun, 27 Nov 2022 12:00:00 GMT</pubDate>
+			<description>New functions added in Excel for Microsoft 365 make it easier than ever before for timetablers to calculate the numbers of students enrolled on specific combinations of courses units / modules.</description>
+		</item>
+
+		<item>
 			<title>Timetable Contact Tracing</title>
 			<link>https://www.paulbrierley.xyz/articles/timetable-contact-tracing.html</link>
 			<guid>https://www.paulbrierley.xyz/articles/timetable-contact-tracing.html</guid>
