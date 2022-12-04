@@ -25,6 +25,14 @@
 			<description>During the pandemic it was critical to identify students who had been in contact with those who had tested positive for COVID-19. This  article provides some resources for performing contact tracing on timetable data from Syllabus+.</description>
 		</item>
 
+		<item>
+			<title>Programme Pathway Combinations with Combo Counter</title>
+			<link>https://www.paulbrierley.xyz/articles/combo-counter.html</link>
+			<guid>https://www.paulbrierley.xyz/articles/combo-counter.html</guid>
+			<pubDate>Tue, 11 May 2021 12:00:00 GMT</pubDate>
+			<description>A conversation about how to illustrate the impact simple changes to a curriculum offering can have on the number of possible pathways through a degree programme resulted in me writing the Combo Counter app for iOS.</description>
+		</item>
+
 	</channel>
 
 </rss>

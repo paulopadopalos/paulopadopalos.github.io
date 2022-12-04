@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="author" content="Paul Briërley">
+    <meta name="description" content="A conversation about how to illustrate the impact simple changes to a curriculum offering can have on the number of possible pathways through a degree programme resulted in me writing the Combo Counter app for iOS.">
+    <meta name="keywords" content="Paul Brierley, Paul Briërley, Scheduling, Timetabling, Higher Education">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="canonical" href="https://www.paulbrierley.xyz/">
+    <link rel="icon" href="/images/favicon/favicon-32.png" sizes="32x32">
+    <link rel="icon" href="/images/favicon/favicon-128.png" sizes="128x128">
+    <link rel="icon" href="/images/favicon/favicon-180.png" sizes="180x180">
+    <link rel="icon" href="/images/favicon/favicon-192.png" sizes="192x192">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/grid.css">
+    <link rel="stylesheet" href="/css/typography.css">
+
+    <title>Paul Briërley</title>
+
+  </head>
+
+
+
+  <body>
+
+    <div class="wrapper">
+
+
+
+      <header>
+        <a id="topOfPage"></a>
+        <h1>Paul Briërley</h1>
+        <nav>
+          <menu>
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/">Tools</a></li>
+            <li><a href="/articles/">Articles</a></li>
+            <li><a href="/resources/">Resources</a></li>
+            <li><a href="/about/">About</a></li>
+          </menu>
+        </nav>
+      </header>
+
+
+
+      <main>
+
+        <article>
+
+          <h2>Programme Pathway Combinations</h2>
+          <p><time datetime="20210510T1200">10<sup>th</sup> May 2021</time></p>
+        
+          <p>A little while back, <a href="https://www.linkedin.com/in/bencsmoreland/">Ben Moreland</a> and I found we were both trying to come up with some way of helping people understand the impact of curriculum design on the number of possible pathways through a degree programme. We both made attempts at building tools in Excel, but the rigid structure of a spreadsheet did not work well with the sheer variety of ways a programme can be structured. I decided to step away from Excel and have a go at writing an iOS app.</p>
+
+          <p>UK university degrees are typically structured as a series of choices a student can make. This structure helps guide students through their choices, but can hide a surprising level of complexity; a simple choice such as "choose 3 from this list of 10 course units" offers students <a href="https://www.calculatorsoup.com/calculators/discretemathematics/combinations.php">120 possible combinations</a>. More surprising is how simple changes can affect the number of choices on offer; allowing students to pick 4 from the list instead of 3 doubles the number of possible options to 210.</p>
+            
+          <p>Things get even more complicated when the choice is picking a number of credits, rather than a number of units. This is an example of the <em><a href="https://en.wikipedia.org/wiki/Knapsack_problem">knapsack problem</a></em>, which - like timetabling itself – is an NP-complete problem. In other words, working out all the possible combinations requires an exhaustive check possibilities – there are no shortcuts.</p>
+            
+          <p>And so, Combo Counter was born. It's an iOS app which allows you to enter the details of the course units your students can study, plus the rules for which combinations they can choose. Once you've entered your data the app will show you how many pathways there are through the degree programme. You can even export the results to a spreadsheet to assist with timetable planning.</p>
+            
+          <p>Combo Counter is free and <a href="https://apps.apple.com/gb/app/combo-counter/id1566395444">available to download now from the App Store</a>.</p>
+
+        </article>
+
+      </main>
+
+
+
+      <footer>
+        <div class="footer_social">
+          <ul>
+            <li><a href="/rss.xml"><img src="/images/social/rss.svg" alt="RSS Feed Logo"></a></li>
+            <li><a href="https://www.linkedin.com/in/pbrierley/"><img src="/images/social/linkedin.svg" alt="LinkedIn Logo"></a></li>
+            <li><a href="https://github.com/paulopadopalos"><img src="/images/social/github.svg" alt="GitHub Logo"></a></li>
+          </ul>
+        </div>
+        <div class="footer_colophon">
+          <p><a href="#topOfPage"><img src="/images/top-of-page.svg" alt="Go to top of page"></a></p>
+        </div>
+      </footer>
+
+
+
+    </div><!-- end of wrapper -->
+
+  </body>
+
+</html>
