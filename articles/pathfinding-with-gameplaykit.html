@@ -54,7 +54,7 @@
           <h2>Pathfinding with GameplayKit</h2>
           <p><time datetime="20230101T1100">1<sup>st</sup> January 2023</time></p>
           
-          <p>Over the years I've had an on-off relationship with GameplayKit. I would start trying to build a game with it, and then end up tying myself in knots trying to get pathfinding working. There aren't many good GameplayKit tutorials on the web, so now that I have it working I'm writing up my findings here in case someone else finds them useful.</p>
+          <p>Over the years I've had an on-off relationship with GameplayKit. I would start trying to build a game with it, and then end up tying myself in knots trying to get pathfinding working. There aren't many good GameplayKit tutorials on the web, so now that I have it working I'm writing up my findings in case someone else finds them useful.</p>
 
           <h3>The short version</h3>
           <p>GameplayKit pathfinding works as advertised, but I've found the <code>GKAgent</code> is a bit fiddly for actually getting sprites to <em>follow</em> those paths in the desired manner. My end result has been to use GameplayKit to calculate the best path, but then just use SpriteKit <code>SKAction</code>s to move my sprites around the screen.</p>
@@ -113,7 +113,7 @@
           let endColumn = tileMap.tileColumnIndex(fromPosition: endPosition!)<br>
           </code></p>
 
-          <p>With starting rows and columns, we now work out which nodes in our graph represent these. <strong>Third lesson</strong> - on a number of occasions I <em>created</em> nodes and tried to work out the route between them which didn't work because those newly created nodes were not part of the graph. You have to use the nodes which are already in the graph for pathfidning. Again, maybe obvious in hindsight but I was stumped by this for way too long!</p>
+          <p>With starting rows and columns, we now work out which nodes in our graph represent these. <strong>Third lesson</strong> - on a number of occasions I <em>created</em> nodes and tried to work out the route between them which didn't work because those newly created nodes were not part of the graph. You have to use the nodes which are already in the graph for pathfinding. Again, maybe obvious in hindsight but I was stumped by this for way too long!</p>
 
           <p><code>
           let startNode = self.gridGraph.node(atGridPosition: vector_int2(x: Int32(startColumn), y: Int32(startRow)))<br>
