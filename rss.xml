@@ -10,12 +10,13 @@
 		<description>Articles on technology, scheduling and higher education.</description>
 
 		<item>
-		</item>
 			<title>Pathfinding with GameplayKit</title>
 			<link>https://www.paulbrierley.xyz/articles/pathfinding-with-gameplaykit.html</link>
 			<guid>https://www.paulbrierley.xyz/articles/pathfinding-with-gameplaykit.htmll</guid>
 			<pubDate>Sun, 01 Jan 2023 11:00:00 GMT</pubDate>
 			<description>A brief guide to how I finally got pathfinding to work using GameplayKit for a top down game using Swift.</description>
+		</item>
+		
 		<item>
 			<title>Calculating Student Pathways in Excel</title>
 			<link>https://www.paulbrierley.xyz/articles/calculating-pathways-in-excel.html</link>
