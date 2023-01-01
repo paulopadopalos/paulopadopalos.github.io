@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="author" content="Paul Briërley">
+    <meta name="description" content="A guide on how I use GameplayKit pathfinding in Swift using GKGridGraph for a top down game.">
+    <meta name="keywords" content="GKAgent, GKGoal, Pathfinding, Swift, GameplayKit, SpriteKit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="canonical" href="https://www.paulbrierley.xyz/">
+    <link rel="icon" href="/images/favicon/favicon-32.png" sizes="32x32">
+    <link rel="icon" href="/images/favicon/favicon-128.png" sizes="128x128">
+    <link rel="icon" href="/images/favicon/favicon-180.png" sizes="180x180">
+    <link rel="icon" href="/images/favicon/favicon-192.png" sizes="192x192">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/grid.css">
+    <link rel="stylesheet" href="/css/typography.css">
+
+    <title>Paul Briërley</title>
+
+  </head>
+
+
+
+  <body>
+
+    <div class="wrapper">
+
+
+
+      <header>
+        <a id="topOfPage"></a>
+        <h1>Paul Briërley</h1>
+        <nav>
+          <menu>
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/">Tools</a></li>
+            <li><a href="/articles/">Articles</a></li>
+            <li><a href="/resources/">Resources</a></li>
+            <li><a href="/about/">About</a></li>
+          </menu>
+        </nav>
+      </header>
+
+
+
+      <main>
+
+        <article>
+
+          <h2>Pathfinding with GameplayKit</h2>
+          <p><time datetime="20230101T1100">1<sup>st</sup> January 2023</time></p>
+          
+          <p>Over the years I've had an on-off relationship with GameplayKit. I would start trying to build a game with it, and then end up tying myself in knots trying to get pathfinding working. There aren't many good GameplayKit tutorials on the web, so now that I have it working I'm writing up my findings here in case someone else finds them useful.</p>
+
+          <h3>The short version</h3>
+          <p>GameplayKit pathfinding works as advertised, but I've found the <code>GKAgent</code> is a bit fiddly for actually getting sprites to <em>follow</em> those paths in the desired manner. My end result has been to use GameplayKit to calculate the best path, but then just use SpriteKit <code>SKAction</code>s to move my sprites around the screen.</p>
+
+          <h3>The basics of my app setup</h3>
+          <p>My app is pretty simple - it just displays a single subclass of <code>SKScene</code> on screen. That scene is loaded from a .sks file, and just contains a single <code>SKTileMapNode</code> which fills the entire scene. My game is a top down game - the player will click or tap somewhere on the screen and the player sprite will move there. For a retro vibe I'm constraining everything to a grid - <code>SKTileMapNode</code> works really well for this because you can draw your entire background using just a single node, so it's an efficient way of painting the scene.</p>
+
+          <h3>Calculating the graph</h3>
+          <p>GameplayKit pathfinding requires you to create a graph of nodes, and then uses this to determine the best route between two points. <strong>First lesson</strong> - the "nodes" used in these graphs are completely unrelated to the nodes you use to draw your scene. This may be obvious to some readers, but the common terminology can make some of the documentation confusing – especially because you can create pathfinding nodes from sprite nodes if you need to.</p>
+
+          <p>The first step to pathfinding is to create the graph. Since I'm constraining movement to a 2D grid, I'll be using <code>GKGridGraph</code>. Note that I use a reference to my <code>SKTileMapNode</code> to get the number of rows and columns in the grid graph.</p>
+
+          <p><code>
+          let gridGraph = GKGridGraph(fromGridStartingAt: vector_int2(x: 0, y: 0),<br>
+          &ensp;width: Int32(floorTileMap.numberOfColumns),<br>
+          &ensp;height: Int32(floorTileMap.numberOfRows),<br>
+          &ensp;diagonalsAllowed: true)
+          </code></p>
+
+          <h3>Responding to  a tap</h3>
+          <p>In your <code>SKScene</code> you can respond to taps on the screen by using the <code>mouseUp:</code> function for macOS or <code>onTap:</code> for iOS. Use these to call a function on your player - in my code, the player is represented by a <code>GKEntity</code> and the code for responding to the tap is in a <code>GKComponent</code>belonging to that entity. When I call this code, I pass in the graph and the location which was tapped:</p>
+
+          <p><code>
+            override func mouseUp(with event: NSEvent)<br>
+            {<br>
+            &ensp;let endPoint = event.location(in: self)<br>
+            &ensp;player.component(ofType: GoToTap.self)?.moveTo(endPoint, onTileMap: self.floorTileMap)<br>
+            }
+          </code></p>
+
+          <p><strong>Second Lesson</strong> - that location is in the <em>scene's coordinate system</em>. We'll need to convert it to the tile map coordinate system before we can use it. Otherwise our sprite will respond to taps, but won't move to the location we expect!</p>
+
+          <h3>Calculating the path</h3>
+          <p>Calculating the path requires a few steps. First, we need to convert the player's current position in the scene coordinate system into the player's current position in the tile map coordinate system. Note that because we're using the GameplayKit "entity and component" approach, we have to look up the sprite component to find it's current position.</p>
+
+          <p><code>
+          if let spriteComponent = self.entity?.component(ofType: SpriteComponent.self)<br>
+          {<br>
+          &ensp;let startPosition = spriteComponent.node.scene?.convert(spriteComponent.node.position,
+          to: tileMap)<br>
+          }
+          </code></p>
+
+          <p>With the starting position, we then work out which row and column of the <code>SKTileMapNode</code> this corresponds with. Note that I'm being a bit lazy with optionals here, and assuming the position <em>will</em> correspond to a location on the tile map. That won't necessarily be the case if you have a tile map which is a different size to your scene.</p>
+
+          <p><code>
+          let startRow = tileMap.tileRowIndex(fromPosition: startPosition!)<br>
+          let startColumn = tileMap.tileColumnIndex(fromPosition: startPosition!)
+          </code></p>
+
+          <p>We now do the same for our destination, as described by the tap or click location we passed to this function.</p>
+
+          <p><code>
+          let endPosition = tileMap.scene?.convert(point, to: tileMap)<br>
+          let endRow = tileMap.tileRowIndex(fromPosition: endPosition!)<br>
+          let endColumn = tileMap.tileColumnIndex(fromPosition: endPosition!)<br>
+          </code></p>
+
+          <p>With starting rows and columns, we now work out which nodes in our graph represent these. <strong>Third lesson</strong> - on a number of occasions I <em>created</em> nodes and tried to work out the route between them which didn't work because those newly created nodes were not part of the graph. You have to use the nodes which are already in the graph for pathfidning. Again, maybe obvious in hindsight but I was stumped by this for way too long!</p>
+
+          <p><code>
+          let startNode = self.gridGraph.node(atGridPosition: vector_int2(x: Int32(startColumn), y: Int32(startRow)))<br>
+          let endNode = self.gridGraph.node(atGridPosition: vector_int2(x: Int32(endColumn), y: Int32(endRow)))<br>
+          </code></p>
+
+          <p>And now, finally, we can use our graph to calculate the path between these nodes. This returns an array of <code>GKGridGraphNode</code> which each have a gridPosition property with x and y coordinates. We remove the first item from the array because that represents our starting position.</p>
+
+          <p><code>
+          var nodesToFollow = self.gridGraph.findPath(from: startNode!, to: endNode!) as! [GKGridGraphNode]
+          nodesToFollow.removeFirst()
+          </code></p>
+
+          <h3>Following the path</h3>
+          <p>In theory at this point, you would create a <code>GKPath</code> to represent the route. <strong>Fourth lesson</strong> - a GKPath is not just the array of coordinates we just calculated. It uses <code>Float</code>s, so needs some conversion... and it also uses its own coordinate system. There's a teeny line in the Apple documentation which says you should probably use the coordinate scheme of your scene. Spotting this was a revolution to me – <em>it's up to you to convert the path into coordinates in your scene.</em> I was totally expecting GameplayKit to do this for me.</p>
+
+          <p>Once you have your <code>GKPath</code> you can use it to create a <code>GKGoal</code> (e.g. to follow the path), and then set that as a <code>GKBehavior</code> of a <code>GKAgent2D</code> which you also add to your player entity. This works... but no matter how much I tweaked the parameters, I never got it to move naturally. <strong>Fifth lesson</strong> - if you <em>do</em> decide to use this approach, note that <code>GKAgent2D</code> has a maximumSpeed property. Until I realised this, I couldn't understand why pathfinding was so slow!</p>
+
+          <p>Instead, I create a bunch of <code>SKAction</code>s and use these to move my player. I found that the precise control this gave me allowed the style of movement I was expecting from the sprite. The code for this is below. Note that there's a little bit of math to convert the integer rows and columns in the found path into the centre of tiles on my 16 x 16 <code>SKTileMapNode</code>.</p>
+
+          <p><code>
+          var animations: [SKAction] = []<br>
+          for node in nodesToFollow<br>
+          {<br>
+          &ensp;let nextX = CGFloat(node.gridPosition.x * 16 + 8)<br>
+          &ensp;let nextY = CGFloat(node.gridPosition.y * 16 + 8)<br>
+          &ensp;let nextPoint = CGPoint(x: nextX, y:nextY)<br>
+          &ensp;let nextAction = SKAction.move(to: nextPoint, duration: 0.5)<br>
+          &ensp;animations.append(nextAction)<br>
+          }<br>
+          spriteComponent.node.run(SKAction.sequence(animations))
+          </code></p>
+
+          <h3>And that's it...</h3>
+          <p>I make no claims that my approach is great. There are probably millions of mistakes I've made and things I could have done better... but my key takeaway is that I got pathfinding working, I managed to use Apple's entity and component system, and my animation works as expected. If you're playing around with GameplayKit and pathfinding, I hope some of the above will be useful to you!</p>
+
+        </article>
+
+      </main>
+
+
+
+      <footer>
+        <div class="footer_social">
+          <ul>
+            <li><a href="/rss.xml"><img src="/images/social/rss.svg" alt="RSS Feed Logo"></a></li>
+            <li><a href="https://www.linkedin.com/in/pbrierley/"><img src="/images/social/linkedin.svg" alt="LinkedIn Logo"></a></li>
+            <li><a href="https://github.com/paulopadopalos"><img src="/images/social/github.svg" alt="GitHub Logo"></a></li>
+          </ul>
+        </div>
+        <div class="footer_colophon">
+          <p><a href="#topOfPage"><img src="/images/top-of-page.svg" alt="Go to top of page"></a></p>
+        </div>
+      </footer>
+
+
+
+    </div><!-- end of wrapper -->
+
+  </body>
+
+</html>
