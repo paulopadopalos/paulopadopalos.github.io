@@ -10,6 +10,14 @@
 		<description>Articles on technology, scheduling and higher education.</description>
 
 		<item>
+			<title>Self Solving Timetables with AI?</title>
+			<link>https://www.paulbrierley.xyz/articles/self-solving-timetables.html</link>
+			<guid>https://www.paulbrierley.xyz/articles/self-solving-timetables.html</guid>
+			<pubDate>Sat, 21 Jan 2023 14:00:00 GMT</pubDate>
+			<description>AI has potential for helping us construct timetables, but I was wondering if the AI found in computer games might actually be sufficient to do the job.</description>
+		</item>
+
+		<item>
 			<title>Pathfinding with GameplayKit</title>
 			<link>https://www.paulbrierley.xyz/articles/pathfinding-with-gameplaykit.html</link>
 			<guid>https://www.paulbrierley.xyz/articles/pathfinding-with-gameplaykit.htmll</guid>
