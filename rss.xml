@@ -10,6 +10,14 @@
 		<description>Articles on technology, scheduling and higher education.</description>
 
 		<item>
+			<title>Reports instead of travel tables</title>
+			<link>https://www.paulbrierley.xyz/articles/reports-instead-of-travel-tables.html</link>
+			<guid>https://www.paulbrierley.xyz/articles/reports-instead-of-travel-tables.html</guid>
+			<pubDate>Tue, 31 Jan 2023 22:00:00 GMT</pubDate>
+			<description>ravel Tables allow us to avoid staff and students having to make impossible journeys across campus, but they are time consuming to run. This article looks at how some simple reports can fulfil the role of travel tables when building a timetable.</description>
+		</item>
+
+		<item>
 			<title>Self Solving Timetables with AI?</title>
 			<link>https://www.paulbrierley.xyz/articles/self-solving-timetables.html</link>
 			<guid>https://www.paulbrierley.xyz/articles/self-solving-timetables.html</guid>

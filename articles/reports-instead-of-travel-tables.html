@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <title>Reports instead of Travel Tables</title>
+
+    <meta charset="utf-8">
+    <meta name="author" content="Paul Briërley">
+    <meta name="description" content="Using reports to identify travel problems within a timetable, without having to resort to time resource intensive travel tables.">
+    <meta name="keywords" content="timetables, travel tables, reporting, optimisation, minimising travel">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="/images/favicon/favicon-32.png" sizes="32x32">
+    <link rel="icon" href="/images/favicon/favicon-128.png" sizes="128x128">
+    <link rel="icon" href="/images/favicon/favicon-180.png" sizes="180x180">
+    <link rel="icon" href="/images/favicon/favicon-192.png" sizes="192x192">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/grid.css">
+    <link rel="stylesheet" href="/css/typography.css">
+
+  </head>
+
+
+
+  <body>
+
+    <div class="wrapper">
+
+
+
+      <header>
+        <a id="topOfPage"></a>
+        <h1>Paul Briërley</h1>
+        <nav>
+          <menu>
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/">Tools</a></li>
+            <li><a href="/articles/">Articles</a></li>
+            <li><a href="/resources/">Resources</a></li>
+            <li><a href="/about/">About</a></li>
+          </menu>
+        </nav>
+      </header>
+
+
+
+      <main>
+
+        <article>
+
+          <h2>Reports instead of travel tables</h2>
+          <p><time datetime="20230131T2200">31<sup>st</sup> January 2023</time></p>
+
+          <p>In a recent discussion on the JISC timetable mailing list, I proposed the use of reports instead of travel tables as a way to optimise the schedule without the system performance hit which travel tables normally introduce. I had a few emails asking for details of how to do this, so I thought I'd write the process up here for reference.</p>
+
+          <p>The aim here is to find pairs of activities where:</p>
+          <ul>
+            <li>The same person attends each activity;</li>
+            <li>Both activities run on the same date;</li>
+            <li>Both activities are scheduled in <em>different</em> buildings;</li>
+            <li>The <em>finish time</em> of one activity is the <em>start time</em> of the other;</li>
+          </ul>
+
+          <p>The process is then broken into three chunks:</p>
+          <ol>
+            <li>Getting a list of activities and their start times;</li>
+            <li>Getting a list of activities and their finish times;</li>
+            <li>Combining those lists to find any problem activities.</li>
+          </ol>
+
+          <h2>Part 1 - Activities and their start times</h2>
+
+          <p>Our aim is to extract some data in the following format:</p>
+
+          <figure>
+            <table>
+              <tr>
+                <th>PersonIdentifier</th>
+                <th>ActivityIdentifier</th>
+                <th>StartDateAndTime</th>
+                <th>BuildingIdentifier</th>
+              </tr>
+              <tr>
+                <td>000123456</td>
+                <td>MATH101/LEC/01</td>
+                <td>2022-01-31T09:00</td>
+                <td>Main Building</td>
+              </tr>
+            </table>
+            <figcaption>Table of activities and start times</figcaption>
+          </figure>
+
+          <p>The important thing here is that you need to expand your data by students and occurrences (so an activity with 10 students attached which runs for 10 weeks will appear 100 times). It's a big dataset, but a relatively simple one.</p>
+
+          <h3>Syllabus+ example</h3>
+
+          <p>The following <abbr title="Structured Query Language">SQL</abbr> will get the data from a Syllabus+ reporting database. Note that I'm assuming activity name and student set hostkeys are unique, and that buildings are represented by zones.</p>
+          
+          <p>
+            <code>
+              SELECT <br>
+              &ensp;rdowner.V_STUDENTSET.Hostkey AS PersonIdentifier, <br>
+              &ensp;rdowner.V_ACTIVITY.Name AS ActivityIdentifier, <br>
+              &ensp;rdowner.V_ACTIVITY_DATETIME.StartDateTime AS StartDateAndTime, <br>
+              &ensp;rdowner.V_ZONE.Name AS BuildingIdentifier <br>
+              FROM <br>
+              &ensp;rdowner.V_STUDENTSET <br>
+              INNER JOIN <br>
+              &ensp;rdowner.V_ACTIVITY_STUDENTSET ON <br>
+              &ensp;&ensp;rdowner.V_STUDENTSET.Id = rdowner.V_ACTIVITY_STUDENTSET.StudentSetId <br>
+              INNER JOIN <br>
+              &ensp;rdowner.V_ACTIVITY ON <br>
+              &ensp;&ensp;rdowner.V_ACTIVITY_STUDENTSET.ActivityId = rdowner.V_ACTIVITY.Id <br>
+              INNER JOIN <br>
+              &ensp;rdowner.V_ACTIVITY_DATETIME ON <br>
+              &ensp;&ensp;rdowner.V_ACTIVITY.Id = rdowner.V_ACTIVITY_DATETIME.ActivityId <br>
+              INNER JOIN <br>
+              &ensp;rdowner.V_ACTIVITY_LOCATION ON <br>
+              &ensp;&ensp;rdowner.V_ACTIVITY_LOCATION.ActivityId = rdowner.V_ACTIVITY.Id <br>
+              INNER JOIN <br>
+              &ensp;rdowner.V_LOCATION ON <br>
+              &ensp;&ensp;rdowner.V_LOCATION.Id = rdowner.V_ACTIVITY_LOCATION.LocationId <br>
+              INNER JOIN <br>
+              &ensp;rdowner.V_ZONE ON <br>
+              &ensp;&ensp;rdowner.V_ZONE.Id = rdowner.V_LOCATION.ZoneId; <br>
+            </code>
+          </p>
+
+          <h2>Part 2 - Activities and their Finish Times</h2>
+
+          <p>This stage is almost exactly the same as the previous example, except that we pull out the activity <em>finish</em> time instead of their start time.</p>
+
+          <figure>
+            <table>
+              <tr>
+                <th>PersonIdentifier</th>
+                <th>ActivityIdentifier</th>
+                <th>EndDateAndTime</th>
+                <th>BuildingIdentifier</th>
+              </tr>
+              <tr>
+                <td>000123456</td>
+                <td>MATH101/LEC/01</td>
+                <td>2022-01-31T11:00</td>
+                <td>Main Building</td>
+              </tr>
+            </table>
+            <figcaption>Table of activities and finish times</figcaption>
+          </figure>
+
+          <h3>Syllabus+ example</h3>
+          The SQL for this is almost identical to the previous one, you just need to change the line which reads
+
+          <p>
+            <code>
+              &ensp;rdowner.V_ACTIVITY_DATETIME.StartDateTime AS StartDateAndTime,
+            </code>
+          </p>
+
+          to
+          <p>
+            <code>
+              &ensp;rdowner.V_ACTIVITY_DATETIME.EndDateTime AS EndDateAndTime, <br>
+            </code>
+          </p>
+
+          <h2>Pulling it all together</h2>
+
+          <p>With those two sets of data we now combine them in a way which lets us find problematic pairings. Here's the format we're going for:</p>
+
+          <figure>
+            <table>
+              <tr>
+                <th>StudentId</th>
+                <th>FirstActivity</th>
+                <th>FirstActivityEnd</th>
+                <th>FirstActivityBuilding</th>
+                <th>SecondActivity</th>
+                <th>SecondActivityStart</th>
+                <th>SecondActivityBuilding</th>
+              </tr>
+              <tr>
+                <td>000123456</td>
+                <td>PHYS101/LEC/01</td>
+                <td>2023-01-31T10:00</td>
+                <td>Main Building</td>
+                <td>SPAN101/TUT/01</td>
+                <td>2023-01-31T10:00</td>
+                <td>Arts Building</td>
+              </tr>
+            </table>
+            <figcaption>Combined results</figcaption>
+          </figure>
+
+          <p>When pulling these two sets of results together you need to match rows where the student IDs are the same, the start date time of one activity is the same as the end date time of the other and where the buildings are different. This will give you all the instances where a student has to move from one building to another for consecutive classes. You can then filter by problematic pairs of buildings to find your travel issues.</p>
+
+          <h3>Syllabus+ Example</h3>
+
+          <p>Assuming we call our two tables <code>StartTimesTable</code> and <code>EndTimesTable</code>, here's the SQL to combine them into the required format.</p>
+
+          <p>
+            <code>
+              SELECT <br>
+              &ensp;StartTimesTable.PersonIdentifier AS StudentID, <br>
+              &ensp;EndTimesTable.ActivityIdentifier AS FirstActivity, <br>
+              &ensp;EndTimesTable.EndDateTime AS FirstActivityEnd, <br>
+              &ensp;EndTimesTable.BuildingIdentifier AS FirstActivityBuilding, <br>
+              &ensp;StartTimesTable.ActivityIdentifier AS SecondActivity, <br>
+              &ensp;StartTimesTable.StartDateAndTime As SecondActivityStart, <br>
+              &ensp;StartTimesTable.BuildingIdentifier AS SecondActivityBuilding <br>
+              FROM <br>
+              &ensp;StartTimesTable <br>
+              INNER JOIN <br>
+              &ensp;EndTimesTable ON<br>
+              &ensp;&ensp;StartTimesTable.PersonIdentifier = EndTimesTable.PersonIdentifier, <br>
+              &ensp;&ensp;StartTimesTable.StartDateAndTime = EndTimesTable.EndDateAndTime, <br>
+              &ensp;&ensp;StartTimesTable.BuildingIdentifier &lt;&gt; EndTimesTable.BuildingIdentifier; <br>
+            </code>
+          </p>
+
+
+        </article>
+
+      </main>
+
+
+
+      <footer>
+        <div class="footer_social">
+          <ul>
+            <li><a href="/rss.xml"><img src="/images/social/rss.svg" alt="RSS Feed Logo"></a></li>
+            <li><a href="https://www.linkedin.com/in/pbrierley/"><img src="/images/social/linkedin.svg" alt="LinkedIn Logo"></a></li>
+            <li><a href="https://github.com/paulopadopalos"><img src="/images/social/github.svg" alt="GitHub Logo"></a></li>
+          </ul>
+        </div>
+        <div class="footer_colophon">
+          <p><a href="#topOfPage"><img src="/images/top-of-page.svg" alt="Go to top of page"></a></p>
+        </div>
+      </footer>
+
+
+
+    </div><!-- end of wrapper -->
+
+  </body>
+
+</html>

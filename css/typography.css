@@ -98,6 +98,16 @@ time
   font-size: var(--size-400);
 }
 
+ul
+{
+  font-size: var(--size-500);
+}
+
+ol
+{
+  font-size: var(--size-500);
+}
+
 
 
 /*
