@@ -10,6 +10,14 @@
 		<description>Articles on technology, scheduling and higher education.</description>
 
 		<item>
+			<title>Power BI for Timetablers (Part One)</title>
+			<link>https://www.paulbrierley.xyz/articles/power-bi-for-timetablers-part-one.html</link>
+			<guid>https://www.paulbrierley.xyz/articles/power-bi-for-timetablers-part-one.html</guid>
+			<pubDate>Mon, 28 Aug 2023 16:00:00 GMT</pubDate>
+			<description>Power BI can be an incredibly powerful tool for timetablers. This article gives a brief introduction to Power BI and teh various parts which make up the system. The article also gives a brief overview of some of the reports which I've built so far.</description>
+		</item>
+
+		<item>
 			<title>Reports instead of travel tables</title>
 			<link>https://www.paulbrierley.xyz/articles/reports-instead-of-travel-tables.html</link>
 			<guid>https://www.paulbrierley.xyz/articles/reports-instead-of-travel-tables.html</guid>

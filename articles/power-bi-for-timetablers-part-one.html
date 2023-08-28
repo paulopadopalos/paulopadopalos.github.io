@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <title>Power BI for Timetablers (Part One)</title>
+
+    <meta charset="utf-8">
+    <meta name="author" content="Paul Briërley">
+    <meta name="description" content="An introduction to Power BI for timetablers.">
+    <meta name="keywords" content="timetables, reporting, power bi, scheduling">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="/images/favicon/favicon-32.png" sizes="32x32">
+    <link rel="icon" href="/images/favicon/favicon-128.png" sizes="128x128">
+    <link rel="icon" href="/images/favicon/favicon-180.png" sizes="180x180">
+    <link rel="icon" href="/images/favicon/favicon-192.png" sizes="192x192">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/grid.css">
+    <link rel="stylesheet" href="/css/typography.css">
+
+  </head>
+
+
+
+  <body>
+
+    <div class="wrapper">
+
+
+
+      <header>
+        <a id="topOfPage"></a>
+        <h1>Paul Briërley</h1>
+        <nav>
+          <menu>
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools/">Tools</a></li>
+            <li><a href="/articles/">Articles</a></li>
+            <li><a href="/resources/">Resources</a></li>
+            <li><a href="/about/">About</a></li>
+          </menu>
+        </nav>
+      </header>
+
+
+
+      <main>
+
+        <article>
+
+          <h2>Power BI for Timetablers (Part One)</h2>
+          <p><time datetime="20230828T1600">28<sup>th</sup> August 2023</time></p>
+
+          <p>Over the last year I've become increasingly impressed by Microsoft Power BI and how we it can be used to support timetabling processes. I intend to share some of what I've done on this site, so hopefully this will eventually form a series of posts... but I'm going to start with a simple explanation of why I've found it so useful and an introduction for those who've not used it before.</p>
+
+          <h3>Why Power BI?</h3>
+
+          <p>I began to explore Power BI when a number of problems arose and I realised that they could all be solved by using it.</p>
+          
+          <ul>
+            <li>I wanted to have a back up plan for the start of the new academic year. If there was an IT outage and our personal timetable system went down, I needed an alternative method for sharing timetabling information across the organisation. <em>As a reporting platform, Power BI fulfils this need.</em></li>
+            <li>The system used for timetabling at <abbr title="University of Manchester">UoM</abbr> has a reporting module built on Microsoft <abbr title="SQL Server Reporting Solution">SSRS</abbr>, but it's fiddly to write a report which is anything more sophisticated than a simple table or list. <em>Power BI comes with a whole host of fancy visualisation, and you can download more.</em></li>
+            <li>That same system also made it difficult to share reports with large numbers of users. Each person who wanted access to reports needed to be granted access on a case by case basis - there was no easy way to make a report available to a large group of users. <em>Power BI works with your Microsoft 365 setup, so you can easily deploy a report to "All Staff" or "Everyone in this MS Teams group".</em></li>
+            <li>Often, I was tasked with writing a report which, once produced, would prompt a whole host of additional work as people asked for the data to be sliced different ways. I wanted a tool which would let people explore the data themselves, without having to understand the underlying data structures. <em>Power BI reports are interactive - you can add things like slicers to allow users to filter the report to what they're interested in.</em></li>
+            <li>We'd also had problems at the start of year with heavy reporting loads knocking our reporting server over. I needed something more robust which could handle large volumes of traffic. <em>Power BI takes a snapshot of your data and uploads it into Microsoft's cloud which can handle pretty much anything you can throw at it.</em></li>
+            <li>I wanted a reporting tool which would refresh at regular intervals, rather than relying on me re-running reports when people need new information. <em>With a premium workspace, Power BI can schedule refreshes of its data at regular intervals.</em></li>
+          </ul>
+
+          <p>It's not a magic wand though. To make the most of it, your organisation needs to be using Microsoft 365. And all the fancy sharing features really need a premium workspace which has a cost associated with it. I've also found that getting the most from Power BI also requires the ability to write some SQL – although Power BI has tools to manipulate and combine data sets, sometimes its easier to use SQL to "shape" the data before it reaches Power BI.</p>
+
+          <h3>Power BI Overview</h3>
+
+          <p>The biggest challenge I had getting my head around Power BI was the terminology. I like to think of it as three main parts, all of which people to as "Power BI" which can get incredibly confusing.</p>
+
+          <ul>
+            <li><strong>Power BI Desktop</strong> is a Windows application which runs on your PC. You use this to import data and design some reports to display it. If you're only interesting in reports for your own use then this is pretty much all you need.</li>
+            <li>The <strong>Power BI Service</strong> is a online service (accessed at <a href="https://powerbi.com/">powerbi.com</a>). You upload ("publish") the reports you built in the desktop application to the service and they get saved in a <em>workspace</em>. You can grant other people access to your workspace(s) and they can also edit the reports. If your organisation lets you have a <em>premium</em> workspace, you can also schedule the data in your report to refresh at regular intervals.</li>
+            <li><strong>Power BI Apps</strong> are also part of the Power BI Service, but these are the "public face" of the apps in your workspace. You can bundle up a set of reports and share them with a pre-defined audience. That audience can view the reports and interact with them, but they can't edit them or the underlying data.</li>
+          </ul>
+
+        <p>So basically you write your report in the desktop application, publish it to the service and then configure permissions so that your intended audience can view the app.</p>
+
+        <h3>My journey with Power BI</h3>
+
+        <p>My first Power BI report was a start of year contingency. A simple report which let any staff member view the timetable for any student. The report wasn't published, but we kept it in our back pocket at the start of year in case we needed it. If activated, we would publish the app to our "all staff" group in Active Directory.</p>
+
+        <p>After the start of year was passed and this contingency was out of the way, we developed a more refined and GDPR compliant version – one which let any staff member view the personal timetables <em>of the students they teach.</em> This was a much requested report, and not something our timetable system could produce. But for Power BI it wasn't an issue, since it knows who you are when you log in, and we were able to use "row level security" to limit what data an individual could use.</p>
+
+        <p>Building on that experience, we then built another report which let any member of staff check what activities are booked in a room – very useful for checking room availability. I also found it useful because there's a Power BI mobile app, and so this made checking room usage on the go very easy. Power BI effectively gave us a mobile app for timetable info!</p>
+
+        <p>And from there we've gone from strength to strength with more reports. We've also published some more reports for all staff members, including class lists (only allowing them to view their own classes) and a "draft timetable checker". We've also created some more niche reports for our scheduling staff which allow them to quickly identify staff who have back to back classes in different buildings, identify staff and students who have a 9am start and 6pm finish on the same day, and a whole host of others. These reports are useful for quality control whilst scheduling the timetable.</p>
+
+        <p>Hopefully the above gives you a flavour of how powerful Power BI can be for timetabling. In my next post I'll talk in a bit more detail about how we put one of these reports together (let me know if there's a specific one you'd like to see covered!</p>
+
+
+        </article>
+
+      </main>
+
+
+
+      <footer>
+        <div class="footer_social">
+          <ul>
+            <li><a href="/rss.xml"><img src="/images/social/rss.svg" alt="RSS Feed Logo"></a></li>
+            <li><a href="https://www.linkedin.com/in/pbrierley/"><img src="/images/social/linkedin.svg" alt="LinkedIn Logo"></a></li>
+            <li><a href="https://github.com/paulopadopalos"><img src="/images/social/github.svg" alt="GitHub Logo"></a></li>
+          </ul>
+        </div>
+        <div class="footer_colophon">
+          <p><a href="#topOfPage"><img src="/images/top-of-page.svg" alt="Go to top of page"></a></p>
+        </div>
+      </footer>
+
+
+
+    </div><!-- end of wrapper -->
+
+  </body>
+
+</html>
