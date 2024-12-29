@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/simple.css">
+        <title>Paul Briërley: Self Solving Timetables</title>
+    </head>
+    <body>
+        <header>
+            <h1>Paul Briërley</h1>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/tools/">Tools</a>
+                <a href="/articles/">Articles</a>
+                <a href="/resources/">Resources</a>
+                <a href="/about/">About</a>
+            </nav>
+        </header>
+        <main>
+            <h2>Self Solving Timetables</h2>
+            <p><em><time datetime="2023-01-23">23<sup>rd</sup> January 2023</time></em></p>
+            <p>Back in 2019 I was fortunate enough to attend a number of AI conferences and I got quite excited about the opportunities for AI to help construct timetables – after all, timetabling is an NP-hard problem and AI has shown promise in tackling these.</p>
+            <p>Much of the excitement around AI today is focussed on two approaches. The first takes a large dataset and learns from it - for example, you give the program hundreds of pictures of hot dogs and it learns to recognise hot dogs. Unfortunately this approach doesn't work for timetabling because of the lack of comparable datasets to learn from. Learning in this way also learns any biases in the dataset: that difficult class which shouldn't clash but does in your old timetable? The AI would learn to replicate those clashes, rather than finding a better solution.</p>
+            <p>The second approach – reinforcement learning – is, I believe, the better option for timetabling. This is where the AI starts with zero knowledge of the problem and develops its own strategy. This has been used to great effect training AIs to play computer games like Breakout and Super Mario. If it can learn to play those it can in theory learn how to operate a scheduling package... but those packages are much more complicated, and producing a "good" timetable is harder than just getting a high score.</p>
+            <h3>A simpler approach</h3>
+            <p>I've recently been wondering if a simpler approach might work. Whilst the term "AI" might have us thinking about ChatGPT or StableDiffusion, it's really just a generic term for any sort of intelligence... and computer games have employed simple forms of intelligence for a long time. In my previous post I made mention of Apple's GameplayKit and I began wondering if the tools it provides might help solve timetables.</p>
+            <p>In particular, it provides an Agent system which controls the behaviour of objects on screen. The idea is that you give your agent a behaviour composed of one or more weighted goals. GameplayKit then takes care of working out how the agent should move on screen.</p>
+            <p>Imagine each of the courses we need to timetable is represented by an agent. We can then give them goals to chase after the courses they don't clash with, and flee from the ones they do. The net result should be that activities which can take place at the same time flock together. I threw together some code with three course units – MATH101 and PHYS101 can clash with each other, but CHEM101 cannot clash with either. The GIF below shows an animation of what happens when we set the programme running.</p>
+            <figure>
+                <img src="/images/timetable-flocking.gif" alt="Animation of course units self organising on screen.">
+                <figcaption>Animation of software running. The MATH101 and PHYS101 course units move towards each other whilst moving away from the CHEM101 course unit.</figcaption>
+            </figure>
+            <h3>Using GameplayKit to self-organise timetable courses.</h3>
+            <p>It seems to work – although how well it will scale to large problems is another matter. A refinement might be to add regions to the screen which correspond with timeslots and/or rooms, so that the agents move towards and self organise within these. Further development could then move activities away from timeslots which have reached their capacity.</p>
+            <p>It's worth clarifying that this approach still suffers from the same problems familiar to timetablers – there's no guarantee of finding the "best" solution, or even finding a solution at all. But what it does offer is a way for the computer, via a limited form of AI, to take some of the hard work out of scheduling. This is really just a proof of concept but I think it's also a new approach to constructing a timetable using a computer.</p>
+            <a href="/articles/index.html" class="button">&larr; Back to all articles</a>
+        </main>
+        <footer>
+            <p>Plain <abbr title="Hyper Text Markup Language">HTML</abbr> and <abbr title="Cascading Style Sheets">CSS</abbr>. No cookies. No JavaScript.</p>
+        </footer>
+    </body>
+</html>

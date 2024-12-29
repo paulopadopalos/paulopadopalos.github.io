@@ -10,57 +10,57 @@
 		<description>Articles on technology, scheduling and higher education.</description>
 
 		<item>
-			<title>Power BI for Timetablers (Part One)</title>
-			<link>https://www.paulbrierley.xyz/articles/power-bi-for-timetablers-part-one.html</link>
-			<guid>https://www.paulbrierley.xyz/articles/power-bi-for-timetablers-part-one.html</guid>
+			<title>Outdated Indoor Maps</title>
+			<link>https://www.paulbrierley.xyz/articles/2024-12-28-outdated-indoor-maps.html</link>
+			<guid>https://www.paulbrierley.xyz/articles/2024-12-28-outdated-indoor-maps.html</guid>
 			<pubDate>Mon, 28 Aug 2023 16:00:00 GMT</pubDate>
-			<description>Power BI can be an incredibly powerful tool for timetablers. This article gives a brief introduction to Power BI and teh various parts which make up the system. The article also gives a brief overview of some of the reports which I've built so far.</description>
+			<description>Indoor maps are great... until someone forgets to keep them updated.</description>
 		</item>
 
 		<item>
 			<title>Reports instead of travel tables</title>
-			<link>https://www.paulbrierley.xyz/articles/reports-instead-of-travel-tables.html</link>
-			<guid>https://www.paulbrierley.xyz/articles/reports-instead-of-travel-tables.html</guid>
+			<link>https://www.paulbrierley.xyz/articles/2023-01-31-reports-instead-of-travel-tables.html</link>
+			<guid>https://www.paulbrierley.xyz/articles/2023-01-31-reports-instead-of-travel-tables.html</guid>
 			<pubDate>Tue, 31 Jan 2023 22:00:00 GMT</pubDate>
 			<description>Travel Tables allow us to avoid staff and students having to make impossible journeys across campus, but they are time consuming to run. This article looks at how some simple reports can fulfil the role of travel tables when building a timetable.</description>
 		</item>
 
 		<item>
-			<title>Self Solving Timetables with AI?</title>
-			<link>https://www.paulbrierley.xyz/articles/self-solving-timetables.html</link>
-			<guid>https://www.paulbrierley.xyz/articles/self-solving-timetables.html</guid>
+			<title>Self Solving Timetables?</title>
+			<link>https://www.paulbrierley.xyz/articles/2023-01-21-self-solving-timetables.html</link>
+			<guid>https://www.paulbrierley.xyz/articles/2023-01-21-self-solving-timetables.html</guid>
 			<pubDate>Sat, 21 Jan 2023 14:00:00 GMT</pubDate>
-			<description>AI has potential for helping us construct timetables, but I was wondering if the AI found in computer games might actually be sufficient to do the job.</description>
+			<description>AI has potential for helping us construct timetables, but I was wondering if the simpler logic found in computer games might actually be sufficient to do the job.</description>
 		</item>
 
 		<item>
 			<title>Pathfinding with GameplayKit</title>
-			<link>https://www.paulbrierley.xyz/articles/pathfinding-with-gameplaykit.html</link>
-			<guid>https://www.paulbrierley.xyz/articles/pathfinding-with-gameplaykit.htmll</guid>
+			<link>https://www.paulbrierley.xyz/articles/2023-01-01-pathfinding-with-gameplaykit.html</link>
+			<guid>https://www.paulbrierley.xyz/articles/2023-01-01-pathfinding-with-gameplaykit.html</guid>
 			<pubDate>Sun, 01 Jan 2023 11:00:00 GMT</pubDate>
 			<description>A brief guide to how I finally got pathfinding to work using GameplayKit for a top down game using Swift.</description>
 		</item>
 		
 		<item>
 			<title>Calculating Student Pathways in Excel</title>
-			<link>https://www.paulbrierley.xyz/articles/calculating-pathways-in-excel.html</link>
-			<guid>https://www.paulbrierley.xyz/articles/calculating-pathways-in-excel.html</guid>
+			<link>https://www.paulbrierley.xyz/articles/2022-11-27-calculating-pathways-in-excel.html</link>
+			<guid>https://www.paulbrierley.xyz/articles/2022-11-27-calculating-pathways-in-excel.html</guid>
 			<pubDate>Sun, 27 Nov 2022 12:00:00 GMT</pubDate>
 			<description>New functions added in Excel for Microsoft 365 make it easier than ever before for timetablers to calculate the numbers of students enrolled on specific combinations of courses units / modules.</description>
 		</item>
 
 		<item>
 			<title>Timetable Contact Tracing</title>
-			<link>https://www.paulbrierley.xyz/articles/timetable-contact-tracing.html</link>
-			<guid>https://www.paulbrierley.xyz/articles/timetable-contact-tracing.html</guid>
+			<link>https://www.paulbrierley.xyz/articles/2022-01-12-timetable-contact-tracing.html</link>
+			<guid>https://www.paulbrierley.xyz/articles/2022-01-12-timetable-contact-tracing.html</guid>
 			<pubDate>Wed, 12 Jan 2022 12:00:00 GMT</pubDate>
 			<description>During the pandemic it was critical to identify students who had been in contact with those who had tested positive for COVID-19. This  article provides some resources for performing contact tracing on timetable data from Syllabus+.</description>
 		</item>
 
 		<item>
 			<title>Programme Pathway Combinations with Combo Counter</title>
-			<link>https://www.paulbrierley.xyz/articles/combo-counter.html</link>
-			<guid>https://www.paulbrierley.xyz/articles/combo-counter.html</guid>
+			<link>https://www.paulbrierley.xyz/articles/2021-05-10-combo-counter.html</link>
+			<guid>https://www.paulbrierley.xyz/articles/2021-05-10-combo-counter.html</guid>
 			<pubDate>Tue, 11 May 2021 12:00:00 GMT</pubDate>
 			<description>A conversation about how to illustrate the impact simple changes to a curriculum offering can have on the number of possible pathways through a degree programme resulted in me writing the Combo Counter app for iOS.</description>
 		</item>

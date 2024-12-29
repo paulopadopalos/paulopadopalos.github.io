@@ -10,32 +10,36 @@
   </url>
   <url>
     <loc>https://paulbrierley.xyz/articles/</loc>
-    <changefreq>weekly</changefreq>
+    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://paulbrierley.xyz/articles/calculating-pathways-in-excel.html</loc>
+    <loc>https://paulbrierley.xyz/articles/2021-05-10-combo-counter.html</loc>
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://paulbrierley.xyz/articles/combo-counter.html</loc>
+    <loc>https://paulbrierley.xyz/articles/2022-01-12-timetable-contact-tracing.html</loc>
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://paulbrierley.xyz/articles/pathfinding-with-gameplaykit.html</loc>
+    <loc>https://paulbrierley.xyz/articles/2022-11-27-calculating-pathways-in-excel.html</loc>
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://paulbrierley.xyz/articles/reports-instead-of-travel-tables.html</loc>
+    <loc>https://paulbrierley.xyz/articles/2023-01-01-pathfinding-with-gameplaykit.html</loc>
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://www.paulbrierley.xyz/articles/self-solving-timetables.html</loc>
+    <loc>https://paulbrierley.xyz/articles/2023-01-21-self-solving-timetables.html</loc>
+    <changefreq>yearly</changefreq>
+  </url>    
+  <url>
+    <loc>https://paulbrierley.xyz/articles/2023-01-31-reports-instead-of-travel-tables.html</loc>
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://paulbrierley.xyz/articles/timetable-contact-tracing.html</loc>
+    <loc>https://paulbrierley.xyz/articles/2024-12-28-outdated-indoor-maps.html</loc>
     <changefreq>yearly</changefreq>
-  </url>      
+  </url>    
   <url>
     <loc>https://paulbrierley.xyz/resources/</loc>
     <changefreq>monthly</changefreq>

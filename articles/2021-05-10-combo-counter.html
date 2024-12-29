@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/simple.css">
+        <title>Paul Briërley: Programme Pathway Combinations</title>
+    </head>
+    <body>
+        <header>
+            <h1>Paul Briërley</h1>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/tools/">Tools</a>
+                <a href="/articles/">Articles</a>
+                <a href="/resources/">Resources</a>
+                <a href="/about/">About</a>
+            </nav>
+        </header>
+        <main>
+            <h2>Programme Pathway Combinations</h2>
+            <p><em><time datetime="2021-05-10">10<sup>th</sup> May 2021</time></em></p>
+            <p>A little while back, <a href="https://www.linkedin.com/in/bencsmoreland/">Ben Moreland</a> and I found we were both trying to come up with some way of helping people understand the impact of curriculum design on the number of possible pathways through a degree programme. We both made attempts at building tools in Excel, but the rigid structure of a spreadsheet did not work well with the sheer variety of ways a programme can be structured. I decided to step away from Excel and have a go at writing an iOS app.</p>
+            <p>UK university degrees are typically structured as a series of choices a student can make. This structure helps guide students through their choices, but can hide a surprising level of complexity; a simple choice such as "choose 3 from this list of 10 course units" offers students <a href="https://www.calculatorsoup.com/calculators/discretemathematics/combinations.php">120 possible combinations</a>. More surprising is how simple changes can affect the number of choices on offer; allowing students to pick 4 from the list instead of 3 doubles the number of possible options to 210.</p>
+            <p>Things get even more complicated when the choice is picking a number of credits, rather than a number of units. This is an example of the <em><a href="https://en.wikipedia.org/wiki/Knapsack_problem">knapsack problem</a></em>, which - like timetabling itself – is an NP-complete problem. In other words, working out all the possible combinations requires an exhaustive check possibilities – there are no shortcuts.</p>
+            <p>And so, Combo Counter was born. It's an iOS app which allows you to enter the details of the course units your students can study, plus the rules for which combinations they can choose. Once you've entered your data the app will show you how many pathways there are through the degree programme. You can even export the results to a spreadsheet to assist with timetable planning.</p>
+            <p>Combo Counter is free and available to <a href="https://apps.apple.com/gb/app/combo-counter/id1566395444">download now from the App Store</a>.</p>
+            <a href="/articles/index.html" class="button">&larr; Back to all articles</a>
+        </main>
+        <footer>
+            <p>Plain <abbr title="Hyper Text Markup Language">HTML</abbr> and <abbr title="Cascading Style Sheets">CSS</abbr>. No cookies. No JavaScript.</p>
+        </footer>
+    </body>
+</html>

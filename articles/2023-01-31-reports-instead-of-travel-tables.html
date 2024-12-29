@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/simple.css">
+        <title>Paul Briërley: Reports instead of travel tables</title>
+    </head>
+    <body>
+        <header>
+            <h1>Paul Briërley</h1>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/tools/">Tools</a>
+                <a href="/articles/">Articles</a>
+                <a href="/resources/">Resources</a>
+                <a href="/about/">About</a>
+            </nav>
+        </header>
+        <main>
+            <h2>Reports instead of travel tables</h2>
+            <p><em><time datetime="2023-01-31">31<sup>st</sup> January 2023</time></em></p>
+            <p>In a recent discussion on the JISC timetable mailing list, I proposed the use of reports instead of travel tables as a way to optimise the schedule without the system performance hit which travel tables normally introduce. I had a few emails asking for details of how to do this, so I thought I'd write the process up here for reference.</p>
+            <p>The aim here is to find pairs of activities where:</p>
+            <ul>
+                <li>The same person attends each activity;</li>
+                <li>Both activities run on the same date;</li>
+                <li>Both activities are scheduled in different buildings;</li>
+                <li>The finish time of one activity is the start time of the other;</li>
+            </ul>
+            <p>The process is therefore broken into three chunks:</p>
+            <ol>
+                <li>Getting a list of activities and their start times;</li>
+                <li>Getting a list of activities and their finish times;</li>
+                <li>Combining those lists to find any problem activities.</li>
+            </ol>
+            <h3>Part 1 - Activities and their start times</h3>
+            <p>Our aim is to extract some data in the following format:</p>
+            <figure>
+                <table>
+                    <tr>
+                        <th>PersonIdentifier</th>
+                        <th>ActivityIdentifier</th>
+                        <th>StartDateAndTime</th>
+                        <th>BuildingIdentifier</th>
+                    </tr>
+                    <tr>
+                        <td>000123456</td>
+                        <td>MATH101/LEC/01</td>
+                        <td>2022-01-31T09:00</td>
+                        <td>Main Building</td>
+                    </tr>
+                </table>
+                <figcaption>
+                    Table of activities and start times
+                </figcaption>
+            </figure>
+            <p>The important thing here is that you need to expand your data by students and occurrences (so an activity with 10 students attached which runs for 10 weeks will appear 100 times). It's a big dataset, but a relatively simple one.</p>
+            <section>
+                <h4>Syllabus+ Example</h4>
+                <p>The following SQL will get the data from a Syllabus+ reporting database. Note that I'm assuming activity name and student set hostkeys are unique, and that buildings are represented by zones.</p>
+                <p><code>
+                    SELECT<br>
+                     rdowner.V_STUDENTSET.Hostkey AS PersonIdentifier,<br>
+                     rdowner.V_ACTIVITY.Name AS ActivityIdentifier,<br>
+                     rdowner.V_ACTIVITY_DATETIME.StartDateTime AS StartDateAndTime,<br>
+                     rdowner.V_ZONE.Name AS BuildingIdentifier<br>
+                    FROM<br>
+                     rdowner.V_STUDENTSET<br>
+                    INNER JOIN<br>
+                     rdowner.V_ACTIVITY_STUDENTSET ON<br>
+                      rdowner.V_STUDENTSET.Id = rdowner.V_ACTIVITY_STUDENTSET.StudentSetId<br>
+                    INNER JOIN<br>
+                     rdowner.V_ACTIVITY ON<br>
+                      rdowner.V_ACTIVITY_STUDENTSET.ActivityId = rdowner.V_ACTIVITY.Id<br>
+                    INNER JOIN<br>
+                     rdowner.V_ACTIVITY_DATETIME ON<br>
+                      rdowner.V_ACTIVITY.Id = rdowner.V_ACTIVITY_DATETIME.ActivityId<br>
+                    INNER JOIN<br>
+                     rdowner.V_ACTIVITY_LOCATION ON
+                      rdowner.V_ACTIVITY_LOCATION.ActivityId = rdowner.V_ACTIVITY.Id<br>
+                    INNER JOIN<br>
+                     rdowner.V_LOCATION ON<br>
+                      rdowner.V_LOCATION.Id = rdowner.V_ACTIVITY_LOCATION.LocationId<br>
+                    INNER JOIN<br>
+                     rdowner.V_ZONE ON<br>
+                      rdowner.V_ZONE.Id = rdowner.V_LOCATION.ZoneId;
+                </code></p>
+            </section>
+            <h3>Part 2 - Activities and their Finish Times</h3>
+            <p>This stage is almost exactly the same as the previous example, except that we pull out the activity finish time instead of their start time.</p>
+            <figure>
+                <table>
+                    <tr>
+                        <th>PersonIdentifier</th>
+                        <th>ActivityIdentifier</th>
+                        <th>StartDateAndTime</th>
+                        <th>BuildingIdentifier</th>
+                    </tr>
+                    <tr>
+                        <td>000123456</td>
+                        <td>MATH101/LEC/01</td>
+                        <td>2022-01-31T11:00</td>
+                        <td>Main Building</td>
+                    </tr>
+                </table>
+                <figcaption>
+                    Table of activities and finish times
+                </figcaption>
+            </figure>
+            <section>
+                <h4>Syllabus+ Example</h4>
+                <p>The SQL for this is almost identical to the previous one, you just need to change the line which reads</p>
+                <p><code>rdowner.V_ACTIVITY_DATETIME.StartDateTime AS StartDateAndTime,</code></p>
+                <p>to</p>
+                <p><code>rdowner.V_ACTIVITY_DATETIME.EndDateTime AS EndDateAndTime,</code></p>
+            </section>
+            <h3>Part 3 - Pulling it all together</h3>
+            <p>With those two sets of data we now combine them in a way which lets us find problematic pairings. Here's the format we're going for:</p>
+            <figure>
+                <table>
+                    <tr>
+                        <th>StudentId</th>
+                        <th>FirstActivity</th>
+                        <th>FirstActivityEnd</th>
+                        <th>FirstActivityBuilding</th>
+                        <th>SecondActivity</th>
+                        <th>SecondActivityStart</th>
+                        <th>SecondActivityBuilding</th>
+                    </tr>
+                    <tr>
+                        <td>000123456</td>
+                        <td>PHYS101/LEC/01</td>
+                        <td>2023-01-31T10:00</td>
+                        <td>Main Building</td>
+                        <td>SPAN101/TUT/01</td>
+                        <td>2023-01-31T10:00</td>
+                        <td>Arts Building</td>
+                    </tr>
+                </table>
+                <figcaption>Table of Combined Results, showing a student with consecutive activities in different buildings.</figcaption>
+            </figure>
+            <p>When pulling these two sets of results together you need to match rows where the student IDs are the same, the start date time of one activity is the same as the end date time of the other and where the buildings are different. This will give you all the instances where a student has to move from one building to another for consecutive classes. You can then filter by problematic pairs of buildings to find your travel issues.</p>
+            <section>
+                <h4>Syllabus+ Example</h4>
+                <p>Assuming we call our two previous tables <code>StartTimesTable</code> and <code>EndTimesTable</code>, here's the SQL to combine them into the required format.</p>
+                <p><code>
+                    SELECT<br>
+ StartTimesTable.PersonIdentifier AS StudentID,<br>
+ EndTimesTable.ActivityIdentifier AS FirstActivity,<br>
+ EndTimesTable.EndDateTime AS FirstActivityEnd,<br>
+ EndTimesTable.BuildingIdentifier AS FirstActivityBuilding,<br>
+ StartTimesTable.ActivityIdentifier AS SecondActivity,<br>
+ StartTimesTable.StartDateAndTime As SecondActivityStart,<br>
+ StartTimesTable.BuildingIdentifier AS SecondActivityBuilding<br>
+FROM<br>
+ StartTimesTable<br>
+INNER JOIN<br>
+ EndTimesTable ON<br>
+  StartTimesTable.PersonIdentifier = EndTimesTable.PersonIdentifier,<br>
+  StartTimesTable.StartDateAndTime = EndTimesTable.EndDateAndTime,<br>
+  StartTimesTable.BuildingIdentifier <> EndTimesTable.BuildingIdentifier;
+                </code></p>
+            </section>
+
+
+
+
+
+            <a href="/articles/index.html" class="button">&larr; Back to all articles</a>
+        </main>
+        <footer>
+            <p>Plain <abbr title="Hyper Text Markup Language">HTML</abbr> and <abbr title="Cascading Style Sheets">CSS</abbr>. No cookies. No JavaScript.</p>
+        </footer>
+    </body>
+</html>
