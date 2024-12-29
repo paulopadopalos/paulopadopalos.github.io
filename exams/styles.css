@@ -1,0 +1,17 @@
+body
+{
+	font-family: sans-serif;
+	padding: 1rem;
+}
+
+footer
+{
+	font-style: italic;
+	font-size: small;
+}
+
+ul
+{
+	line-height: 150%;
+	font-size: larger;
+}
