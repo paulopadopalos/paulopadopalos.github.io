@@ -15,3 +15,11 @@ ul
 	line-height: 150%;
 	font-size: larger;
 }
+
+hr
+{
+	margin-top: 5rem;
+	border-width: 5px;
+	border-style: solid;
+	border-color: blueviolet;
+}
